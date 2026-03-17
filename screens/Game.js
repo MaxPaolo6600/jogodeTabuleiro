@@ -91,7 +91,7 @@ export default function Game({ route }) {
     return (
         <View style={styles.container}>
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
-                Jogador {turn + 1}
+                vez de jogador {turn + 1}
             </Text>
             <View style={styles.sizeSelector}>
                 <Text style={styles.label}>Peça:</Text>
