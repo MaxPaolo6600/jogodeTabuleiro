@@ -39,8 +39,7 @@ export default function Game({ route }) {
                 cell.small === cell.medium &&
                 cell.medium === cell.large
             ) {
-                return cell.small;
-            }
+                return cell.small;}
         }
         for (let line of winLines) {
             const [a, b, c] = line;
@@ -94,7 +93,7 @@ export default function Game({ route }) {
                 vez de jogador {turn + 1}
             </Text>
             <View style={styles.sizeSelector}>
-                <Text style={styles.label}>Peça:</Text>
+                <Text style={styles.label}>ihijPeça:</Text>
                 <Text
                     style={[
                         styles.sizeBtn,
