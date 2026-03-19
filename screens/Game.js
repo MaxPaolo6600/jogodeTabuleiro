@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import Cell from "../components/Cell";
 
 const playerColors = [
-    "#274E5D",
-    "#137FA8",
-    "#5C0F0F",
-    "#BE2020"
+    "#ff0000",
+    "#00ff00",
+    "#0084ff",
+    "#8400ff"
 ];
 const winLines = [
     [0, 1, 2],
@@ -29,6 +29,14 @@ export default function Game({ route }) {
     );
     const [turn, setTurn] = useState(0);
     const [pieceSize, setPieceSize] = useState("small");
+
+    const [peca, setPeca] = useState(
+        Array.from({ length: players }, () => ({
+            small: 3,
+            medium: 3,
+            large: 3
+        }))
+    );
 
     function checkWin(tabuleiro) {
         const tamanhos = ["small", "medium", "large"];
@@ -72,26 +80,42 @@ export default function Game({ route }) {
         }
         return null;
     }
+
     function play(index) {
         let novoQuadro = [...tabuleiro];
-        if (!novoQuadro[index][pieceSize]) {
-            novoQuadro[index] = {
-                ...novoQuadro[index],
-                [pieceSize]: playerColors[turn]
-            };
-            setTabuleiro(novoQuadro);
-            const winner = checkWin(novoQuadro);
-            if (winner) {
-                Alert.alert(`Jogador ${turn + 1} venceu!`);
-                return;
-            }
-            setTurn((turn + 1) % players);
+        let novasPecas = [...peca];
+
+        if (novasPecas[turn][pieceSize] <= 0) {
+            Alert.alert("Sem peças!", "Você não tem mais peças desse tamanho.");
+            return;
         }
+        if (novoQuadro[index][pieceSize]) return;
+        novoQuadro[index] = {
+            ...novoQuadro[index],
+            [pieceSize]: playerColors[turn]
+        };
+        novasPecas[turn][pieceSize] -= 1;
+        setTabuleiro(novoQuadro);
+        setPeca(novasPecas);
+
+        const winner = checkWin(novoQuadro);
+        if (winner) {
+            Alert.alert(`Jogador ${turn + 1} venceu!`);
+            return;
+        }
+        setTurn((turn + 1) % players);
     }
+
     return (
         <View style={styles.container}>
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
-                Jogador {turn + 1}
+                Vez do Jogador {turn + 1}
+            </Text>
+            <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
+            <Text style={styles.text2}>
+                Pequenas: {peca[turn].small} |
+                Médias: {peca[turn].medium} |
+                Grandes: {peca[turn].large}
             </Text>
             <View style={styles.sizeSelector}>
                 <Text style={styles.label}>Peça:</Text>
@@ -173,5 +197,9 @@ const styles = StyleSheet.create({
     },
     selected: {
         backgroundColor: "#274E5D"
+    },
+    text2: {
+        color: "white",
+        margin: 5,
     }
 });
