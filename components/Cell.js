@@ -3,14 +3,13 @@ import { TouchableOpacity, View, StyleSheet } from "react-native";
 
 export default function Cell({ cell, onPress }) {
     function renderPiece(size, color) {
-        let tamanho = 20;
-        if (size==="medium") tamanho = 35;
-        if (size==="large") tamanho = 50;
+        let tamanho = 35;
+        if (size==="medium") tamanho = 65;
+        if (size==="large") tamanho = 80;
         return (
             <View style={{
                 width: tamanho,
                 height: tamanho,
-                borderRadius: tamanho / 2,
                 borderWidth: 2,
                 borderColor: color,
                 position: 'absolute'
