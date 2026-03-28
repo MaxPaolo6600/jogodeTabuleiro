@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function HomeScreen({ navigation }) {
     function startGame(players) {
-        navigation.navigate("Game", { players });
+        navigation.navigate("Tutorial", { players });
     }
     return (
         <View style={styles.container}>

@@ -120,28 +120,19 @@ export default function Game({ route }) {
             <View style={styles.sizeSelector}>
                 <Text style={styles.label}>Peça:</Text>
                 <Text
-                    style={[
-                        styles.sizeBtn,
-                        pieceSize === "small" && styles.selected
-                    ]}
+                    style={[styles.sizeBtn, pieceSize === "small" && styles.selected]}
                     onPress={() => setPieceSize("small")}
                 >
                     Pequena
                 </Text>
                 <Text
-                    style={[
-                        styles.sizeBtn,
-                        pieceSize === "medium" && styles.selected
-                    ]}
+                    style={[styles.sizeBtn, pieceSize === "medium" && styles.selected]}
                     onPress={() => setPieceSize("medium")}
                 >
                     Média
                 </Text>
                 <Text
-                    style={[
-                        styles.sizeBtn,
-                        pieceSize === "large" && styles.selected
-                    ]}
+                    style={[styles.sizeBtn, pieceSize === "large" && styles.selected]}
                     onPress={() => setPieceSize("large")}
                 >
                     Grande
