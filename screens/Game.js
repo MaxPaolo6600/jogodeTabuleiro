@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Touchable, TouchableOpacity } from "react-native";
 import Cell from "../components/Cell";
 
 const playerColors = [
@@ -18,6 +18,7 @@ const winLines = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
 export default function Game({ route }) {
     const { players } = route.params;
     const [tabuleiro, setTabuleiro] = useState(
@@ -25,18 +26,16 @@ export default function Game({ route }) {
             small: null,
             medium: null,
             large: null
-        }))
-    );
+        })));
     const [turn, setTurn] = useState(0);
-    const [pieceSize, setPieceSize] = useState("small");
-
+    const [pecaSize, setPecaSize] = useState("small");
     const [peca, setPeca] = useState(
         Array.from({ length: players }, () => ({
             small: 3,
             medium: 3,
             large: 3
-        }))
-    );
+        })));
+    const [vitoria, setVitoria] = useState(Array.from({ length: players }, () => 0)) //para cada posição da array colocar 0, acho que esta funcionando kkkkk ;)
 
     function checkWin(tabuleiro) {
         const tamanhos = ["small", "medium", "large"];
@@ -85,25 +84,50 @@ export default function Game({ route }) {
         let novoQuadro = [...tabuleiro];
         let novasPecas = [...peca];
 
-        if (novasPecas[turn][pieceSize] <= 0) {
+        if (novasPecas[turn][pecaSize] <= 0) {
             Alert.alert("Sem peças!", "Você não tem mais peças desse tamanho.");
             return;
         }
-        if (novoQuadro[index][pieceSize]) return;
+
+        if (novoQuadro[index][pecaSize]) return;
         novoQuadro[index] = {
             ...novoQuadro[index],
-            [pieceSize]: playerColors[turn]
+            [pecaSize]: playerColors[turn]
         };
-        novasPecas[turn][pieceSize] -= 1;
+        novasPecas[turn][pecaSize] -= 1;
         setTabuleiro(novoQuadro);
         setPeca(novasPecas);
 
-        const winner = checkWin(novoQuadro);
-        if (winner) {
-            Alert.alert(`Jogador ${turn + 1} venceu!`);
+        const vitorioso = checkWin(novoQuadro);
+        if (vitorioso) {
+            const vitoriosoIndex = playerColors.indexOf(vitorioso);
+            let newWins = [...vitoria];
+            newWins[vitoriosoIndex] += 1;
+            setVitoria(newWins);
+            Alert.alert(`Jogador ${vitoriosoIndex + 1} venceu!`);
             return;
         }
         setTurn((turn + 1) % players);
+    }
+
+    function resetar() {
+        setTabuleiro(
+            Array.from({ length: 9 }, () => ({
+                small: null,
+                medium: null,
+                large: null
+            }))
+        );
+        setPeca(
+            Array.from({ length: players }, () => ({
+                small: 3,
+                medium: 3,
+                large: 3
+            }))
+        );
+
+        setTurn(0); // opcional par volta pro jogador 1
+        setPecaSize("small"); // opcional para volta pro tamanho padrão
     }
 
     return (
@@ -120,20 +144,20 @@ export default function Game({ route }) {
             <View style={styles.sizeSelector}>
                 <Text style={styles.label}>Peça:</Text>
                 <Text
-                    style={[styles.sizeBtn, pieceSize === "small" && styles.selected]}
-                    onPress={() => setPieceSize("small")}
+                    style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
+                    onPress={() => setPecaSize("small")}
                 >
                     Pequena
                 </Text>
                 <Text
-                    style={[styles.sizeBtn, pieceSize === "medium" && styles.selected]}
-                    onPress={() => setPieceSize("medium")}
+                    style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
+                    onPress={() => setPecaSize("medium")}
                 >
                     Média
                 </Text>
                 <Text
-                    style={[styles.sizeBtn, pieceSize === "large" && styles.selected]}
-                    onPress={() => setPieceSize("large")}
+                    style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
+                    onPress={() => setPecaSize("large")}
                 >
                     Grande
                 </Text>
@@ -147,6 +171,19 @@ export default function Game({ route }) {
                     />
                 ))}
             </View>
+            <View style={styles.pontos}>
+                {vitoria.map((w, i) => (
+                    <Text key={i} style={styles.text2}>
+                        Jogador {i + 1}: <Text style={[{ color: playerColors[i] }]}>{w}</Text>
+                    </Text>
+                ))}
+            </View>
+            <TouchableOpacity
+                style={styles.btnReseta}
+                onPress={resetar}
+            >
+                <Text style={styles.btnReseta}>Reset</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -156,12 +193,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#262B2D",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     tabuleiro: {
         width: 300,
         flexDirection: "row",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        marginBottom: 15,
     },
     turn: {
         color: 'white',
@@ -174,23 +212,37 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 20,
         gap: 10,
-        alignItems: "center"
+        alignItems: "center",
     },
     label: {
         color: "white",
-        fontSize: 18
+        fontSize: 18,
     },
     sizeBtn: {
         color: "white",
         backgroundColor: "#137FA8",
         padding: 10,
-        borderRadius: 8
+        borderRadius: 8,
+    },
+    btnReseta: {
+        color: "white",
+        backgroundColor: "#911515",
+        padding: 10,
+        borderRadius: 8,
+        textAlign: "center",
     },
     selected: {
-        backgroundColor: "#274E5D"
+        backgroundColor: "#274E5D",
     },
     text2: {
         color: "white",
         margin: 5,
-    }
+    },
+    pontos: {
+        flexDirection: "row",
+        margin: 15,
+        backgroundColor: "#000000",
+        borderRadius: 100,
+        padding: 10,
+    },
 });
