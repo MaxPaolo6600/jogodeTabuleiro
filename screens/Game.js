@@ -8,15 +8,10 @@ const playerColors = [
     "#0084ff",
     "#8400ff"
 ];
-const winLines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
+const winLines = [ // linhas p ganha
+    [0, 1, 2],[3, 4, 5],[6, 7, 8], //tentar achar uma forma melhor depois
+    [0, 3, 6],[1, 4, 7],[2, 5, 8],
+    [0, 4, 8],[2, 4, 6]
 ];
 
 export default function Game({ route }) {
@@ -49,7 +44,7 @@ export default function Game({ route }) {
                 return cell.small;
             }
         }
-        for (let line of winLines) {
+        for (let line of winLines) { //acho q funciona
             const [a, b, c] = line;
             for (let color of playerColors) {
                 for (let size of tamanhos) {
@@ -126,8 +121,8 @@ export default function Game({ route }) {
             }))
         );
 
-        setTurn(0); // opcional par volta pro jogador 1
-        setPecaSize("small"); // opcional para volta pro tamanho padrão
+        setTurn(0);
+        setPecaSize("small");
     }
 
     return (
