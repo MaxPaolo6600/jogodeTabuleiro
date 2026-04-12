@@ -10,8 +10,14 @@ export default function Tutorial({ navigation, route }) {
     function goToGame() {
         navigation.navigate("Game", { players });
     }
+    function goHistoria() {
+        navigation.navigate("Historia", { players });
+    }
     return (
         <View style={styles.container}>
+            <View style={styles.containerTitulo}>
+                <Text style={styles.textTitulo}>T<Text style={styles.span1}>U</Text>T<Text style={styles.span2}>O</Text>R<Text style={styles.span3}>I</Text>A<Text style={styles.span4}>L</Text></Text>
+            </View>
             <Text style={styles.text1}>
                 Otrio é um jogo de estratégia para<Text style={styles.span1}> 2 </Text>a <Text style={styles.span4}>4 </Text> jogadores semelhante ao jogo da velha, porém mais complexo,
                 pois cada jogador possui peças de três tamanhos diferentes
@@ -28,13 +34,16 @@ export default function Tutorial({ navigation, route }) {
                 </View>
                 <View style={styles.container3}>
                     <Image source={img2} style={styles.img} />
-                    <Text style={styles.textP}>Todos no centro</Text>
+                    <Text style={styles.textP}>Todos juntos</Text>
                 </View>
                 <View style={styles.container3}>
                     <Image source={img3} style={styles.img} />
                     <Text style={styles.textP}>Em linha normal</Text>
                 </View>
             </View>
+            <TouchableOpacity style={styles.button} onPress={goHistoria}>
+                <Text style={styles.text}>Historinha📖</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={goToGame}>
                 <Text style={styles.text}>Começar Jogo</Text>
             </TouchableOpacity>
@@ -51,9 +60,14 @@ const styles = StyleSheet.create({
     container2: {
         flexDirection: "row",
     },
-    container3:{
+    container3: {
         justifyContent: "center",
         alignItems: "center",
+    },
+    containerTitulo:{
+        borderColor: '#137FA8',
+        borderWidth: 2,
+        padding: 3,
     },
     button: {
         color: "white",
@@ -61,6 +75,15 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 8,
         marginTop: 15,
+        width: 200,
+    },
+    textTitulo: {
+        fontSize: 50,
+        color: 'white',
+    },
+    text: {
+        textAlign: 'center',
+        color: 'white',
     },
     text1: {
         color: "white",
