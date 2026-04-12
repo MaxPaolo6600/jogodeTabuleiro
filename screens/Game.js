@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert, Touchable, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import Cell from "../components/Cell";
 
 const playerColors = [
@@ -9,9 +9,9 @@ const playerColors = [
     "#8400ff"
 ];
 const winLines = [ // linhas p ganha
-    [0, 1, 2],[3, 4, 5],[6, 7, 8], //tentar achar uma forma melhor depois
-    [0, 3, 6],[1, 4, 7],[2, 5, 8],
-    [0, 4, 8],[2, 4, 6]
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], //tentar achar uma forma melhor depois
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
 ];
 
 export default function Game({ route }) {
@@ -75,6 +75,19 @@ export default function Game({ route }) {
         return null;
     }
 
+    function calcularPorcentagem(tabuleiro) {
+        let total = 9 * 3; //espacos do tabuleiro
+        let ocupados = 0;
+
+        tabuleiro.forEach(cell => {
+            if (cell.small) ocupados++;
+            if (cell.medium) ocupados++;
+            if (cell.large) ocupados++;
+        });
+
+        return Math.floor((ocupados / total) * 100); //porcentagem do tabuleiro
+    }
+
     function play(index) {
         let novoQuadro = [...tabuleiro];
         let novasPecas = [...peca];
@@ -100,6 +113,7 @@ export default function Game({ route }) {
             newWins[vitoriosoIndex] += 1;
             setVitoria(newWins);
             Alert.alert(`Jogador ${vitoriosoIndex + 1} venceu!`);
+            resetar();
             return;
         }
         setTurn((turn + 1) % players);
@@ -173,12 +187,17 @@ export default function Game({ route }) {
                     </Text>
                 ))}
             </View>
-            <TouchableOpacity
-                style={styles.btnReseta}
-                onPress={resetar}
-            >
-                <Text style={styles.btnReseta}>Reset</Text>
-            </TouchableOpacity>
+            <View style={styles.footer}>
+                <TouchableOpacity
+                    style={styles.btnReseta}
+                    onPress={resetar}
+                >
+                    <Text style={styles.btnReseta}>Resetar Tabuleiro</Text>
+                </TouchableOpacity>
+                <Text style={styles.text2}>
+                    Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
+                </Text>
+            </View>
         </View>
     );
 }
@@ -222,7 +241,7 @@ const styles = StyleSheet.create({
     btnReseta: {
         color: "white",
         backgroundColor: "#911515",
-        padding: 10,
+        padding: 5,
         borderRadius: 8,
         textAlign: "center",
     },
