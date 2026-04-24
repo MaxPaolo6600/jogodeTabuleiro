@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground } from "react-native";
 import Cell from "../components/Cell";
+
+const imagem = require('../assets/img/imgback.png')
 
 const playerColors = [
     "#ff0000",
@@ -140,80 +142,82 @@ export default function Game({ route }) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
-                Vez do Jogador {turn + 1}
-            </Text>
-            <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
-            <Text style={styles.text2}>
-                Pequenas: {peca[turn].small} |
-                Médias: {peca[turn].medium} |
-                Grandes: {peca[turn].large}
-            </Text>
-            <View style={styles.sizeSelector}>
-                <Text style={styles.label}>Peça:</Text>
-                <Text
-                    style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
-                    onPress={() => setPecaSize("small")}
-                >
-                    Pequena
+        <ImageBackground source={imagem} style={styles.container}>
+            <View style={styles.container}>
+                <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
+                    Vez do Jogador {turn + 1}
                 </Text>
-                <Text
-                    style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
-                    onPress={() => setPecaSize("medium")}
-                >
-                    Média
-                </Text>
-                <Text
-                    style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
-                    onPress={() => setPecaSize("large")}
-                >
-                    Grande
-                </Text>
-            </View>
-            <View style={styles.tabuleiro}>
-                {tabuleiro.map((cell, i) => (
-                    <Cell
-                        key={i}
-                        cell={cell}
-                        onPress={() => play(i)}
-                    />
-                ))}
-            </View>
-            <View style={styles.pontos}>
-                {vitoria.map((w, i) => (
-                    <Text key={i} style={styles.text2}>
-                        Jogador {i + 1}: <Text style={[{ color: playerColors[i] }]}>{w}</Text>
-                    </Text>
-                ))}
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity
-                    style={styles.btnReseta}
-                    onPress={resetar}
-                >
-                    <Text style={styles.btnReseta}>Resetar Tabuleiro</Text>
-                </TouchableOpacity>
+                <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
                 <Text style={styles.text2}>
-                    Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
+                    Pequenas: {peca[turn].small} |
+                    Médias: {peca[turn].medium} |
+                    Grandes: {peca[turn].large}
                 </Text>
+                <View style={styles.sizeSelector}>
+                    <Text style={styles.label}>Peça:</Text>
+                    <Text
+                        style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
+                        onPress={() => setPecaSize("small")}
+                    >
+                        Pequena
+                    </Text>
+                    <Text
+                        style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
+                        onPress={() => setPecaSize("medium")}
+                    >
+                        Média
+                    </Text>
+                    <Text
+                        style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
+                        onPress={() => setPecaSize("large")}
+                    >
+                        Grande
+                    </Text>
+                </View>
+                <View style={styles.tabuleiro}>
+                    {tabuleiro.map((cell, i) => (
+                        <Cell
+                            key={i}
+                            cell={cell}
+                            onPress={() => play(i)}
+                        />
+                    ))}
+                </View>
+                <View style={styles.pontos}>
+                    {vitoria.map((w, i) => (
+                        <Text key={i} style={styles.text2}>
+                            Jogador {i + 1}: <Text style={[{ color: playerColors[i] }]}>{w}</Text>
+                        </Text>
+                    ))}
+                </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity
+                        style={styles.btnReseta}
+                        onPress={resetar}
+                    >
+                        <Text style={styles.btnReseta}>Resetar Tabuleiro</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.text2}>
+                        Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
+                    </Text>
+                </View>
             </View>
-        </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#262B2D",
         alignItems: "center",
         justifyContent: "center",
     },
     tabuleiro: {
-        width: 300,
+        width: 350,
         flexDirection: "row",
         flexWrap: "wrap",
         marginBottom: 15,
+        justifyContent: "center",
     },
     turn: {
         color: 'white',
