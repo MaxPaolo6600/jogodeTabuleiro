@@ -8,7 +8,7 @@ export default function Historia({ navigation, route }) {
     return (
         <View style={styles.container}>
             <Text style={styles.text1}>
-                Em um reino mágico, quatro aventureiros foram escolhidos para participar de um desafio lendário: encontrar o Cristal Supremo, um artefato antigo que concede poder e glória a quem o possuir.
+                Em um reino chamado Nove Vilas, quatro aventureiros foram escolhidos para participar de um desafio lendário: encontrar o Cristal Supremo, um artefato antigo que concede poder e glória a quem o possuir.
             </Text>
             <Text style={styles.text1}>
                 Os jogadores são rivais, mas compartilham o mesmo objetivo. Cada um segue por caminhos diferentes — florestas encantadas, cavernas escuras, montanhas perigosas e ruínas esquecidas — enfrentando desafios e superando obstáculos.
