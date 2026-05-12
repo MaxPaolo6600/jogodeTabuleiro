@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground } from "react-native";
 import Cell from "../components/Cell";
 
-const imagem = require('../assets/img/imgback.png')
+const imagem = require('../assets/img/imgback.jpg')
 
 const playerColors = [
     "#ff0000",
@@ -136,11 +136,9 @@ export default function Game({ route }) {
                 large: 3
             }))
         );
-
         setTurn(0);
         setPecaSize("small");
     }
-
     return (
         <View style={styles.container}>
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
