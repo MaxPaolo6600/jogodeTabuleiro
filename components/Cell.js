@@ -3,7 +3,7 @@ import { TouchableOpacity, View, StyleSheet } from "react-native";
 
 export default function Cell({ cell, onPress }) {
     const tamanhos = {
-        small: 15,
+        small: 5,
         medium: 17,
         large: 25,
     };
@@ -103,12 +103,9 @@ export default function Cell({ cell, onPress }) {
             style={styles.cell}
             onPress={onPress}
         >
-            {cell.large &&
-                renderPiece("large", cell.large)}
-            {cell.medium &&
-                renderPiece("medium", cell.medium)}
-            {cell.small &&
-                renderPiece("small", cell.small)}
+            {cell.large && renderPiece("large", cell.large)}
+            {cell.medium && renderPiece("medium", cell.medium)}
+            {cell.small && renderPiece("small", cell.small)}
         </TouchableOpacity>
     );
 }

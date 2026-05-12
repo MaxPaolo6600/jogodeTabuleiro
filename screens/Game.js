@@ -144,32 +144,25 @@ export default function Game({ route }) {
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
                 Vez do Jogador {turn + 1}
             </Text>
-            <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
-            <Text style={styles.text2}>
-                Pequenas: {peca[turn].small} |
-                Médias: {peca[turn].medium} |
-                Grandes: {peca[turn].large}
-            </Text>
             <View style={styles.sizeSelector}>
-                <Text style={styles.label}>Peça:</Text>
-                <Text
+                <TouchableOpacity
                     style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
                     onPress={() => setPecaSize("small")}
                 >
-                    Pequena
-                </Text>
-                <Text
+                    <Text style={styles.label}>{peca[turn].small} - Pequeno</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
                     onPress={() => setPecaSize("medium")}
                 >
-                    Média
-                </Text>
-                <Text
+                    <Text style={styles.label}>{peca[turn].medium} - Média</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
                     onPress={() => setPecaSize("large")}
                 >
-                    Grande
-                </Text>
+                    <Text style={styles.label}>{peca[turn].large} - Grande</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.tabuleiro}>
                 <ImageBackground source={imagem} style={styles.tabuleiro} imageStyle={styles.tabuleiro}>
