@@ -142,39 +142,39 @@ export default function Game({ route }) {
     }
 
     return (
-        <ImageBackground source={imagem} style={styles.container}>
-            <View style={styles.container}>
-                <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
-                    Vez do Jogador {turn + 1}
+        <View style={styles.container}>
+            <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
+                Vez do Jogador {turn + 1}
+            </Text>
+            <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
+            <Text style={styles.text2}>
+                Pequenas: {peca[turn].small} |
+                Médias: {peca[turn].medium} |
+                Grandes: {peca[turn].large}
+            </Text>
+            <View style={styles.sizeSelector}>
+                <Text style={styles.label}>Peça:</Text>
+                <Text
+                    style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
+                    onPress={() => setPecaSize("small")}
+                >
+                    Pequena
                 </Text>
-                <Text style={styles.text2}>Você tem essas peças sobrando:</Text>
-                <Text style={styles.text2}>
-                    Pequenas: {peca[turn].small} |
-                    Médias: {peca[turn].medium} |
-                    Grandes: {peca[turn].large}
+                <Text
+                    style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
+                    onPress={() => setPecaSize("medium")}
+                >
+                    Média
                 </Text>
-                <View style={styles.sizeSelector}>
-                    <Text style={styles.label}>Peça:</Text>
-                    <Text
-                        style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
-                        onPress={() => setPecaSize("small")}
-                    >
-                        Pequena
-                    </Text>
-                    <Text
-                        style={[styles.sizeBtn, pecaSize === "medium" && styles.selected]}
-                        onPress={() => setPecaSize("medium")}
-                    >
-                        Média
-                    </Text>
-                    <Text
-                        style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
-                        onPress={() => setPecaSize("large")}
-                    >
-                        Grande
-                    </Text>
-                </View>
-                <View style={styles.tabuleiro}>
+                <Text
+                    style={[styles.sizeBtn, pecaSize === "large" && styles.selected]}
+                    onPress={() => setPecaSize("large")}
+                >
+                    Grande
+                </Text>
+            </View>
+            <View style={styles.tabuleiro}>
+                <ImageBackground source={imagem} style={styles.tabuleiro} imageStyle={styles.tabuleiro}>
                     {tabuleiro.map((cell, i) => (
                         <Cell
                             key={i}
@@ -182,33 +182,34 @@ export default function Game({ route }) {
                             onPress={() => play(i)}
                         />
                     ))}
-                </View>
-                <View style={styles.pontos}>
-                    {vitoria.map((w, i) => (
-                        <Text key={i} style={styles.text2}>
-                            Jogador {i + 1}: <Text style={[{ color: playerColors[i] }]}>{w}</Text>
-                        </Text>
-                    ))}
-                </View>
-                <View style={styles.footer}>
-                    <TouchableOpacity
-                        style={styles.btnReseta}
-                        onPress={resetar}
-                    >
-                        <Text style={styles.btnReseta}>Resetar Tabuleiro</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.text2}>
-                        Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
-                    </Text>
-                </View>
+                </ImageBackground>
             </View>
-        </ImageBackground>
+            <View style={styles.pontos}>
+                {vitoria.map((w, i) => (
+                    <Text key={i} style={styles.text2}>
+                        Jogador {i + 1}: <Text style={[{ color: playerColors[i] }]}>{w}</Text>
+                    </Text>
+                ))}
+            </View>
+            <View style={styles.footer}>
+                <TouchableOpacity
+                    style={styles.btnReseta}
+                    onPress={resetar}
+                >
+                    <Text style={styles.btnReseta}>Resetar Tabuleiro</Text>
+                </TouchableOpacity>
+                <Text style={styles.text2}>
+                    Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
+                </Text>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#262B2D',
         alignItems: "center",
         justifyContent: "center",
     },
@@ -216,8 +217,9 @@ const styles = StyleSheet.create({
         width: 350,
         flexDirection: "row",
         flexWrap: "wrap",
-        marginBottom: 15,
         justifyContent: "center",
+        overflow: "hidden",
+        borderRadius: 30,
     },
     turn: {
         color: 'white',

@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 100,
         margin: 5,
+        opacity: 0.50,
     },
     cell1: {
         width: 67,
@@ -55,5 +56,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 100,
+        opacity: 0.75,
     },
 })
