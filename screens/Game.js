@@ -5,10 +5,10 @@ import Cell from "../components/Cell";
 const imagem = require('../assets/img/imgback.jpg')
 
 const playerColors = [
-    "#ff0000",
-    "#00ff00",
-    "#0084ff",
-    "#8400ff"
+    "#8C3B2F",
+    "#556B2F",
+    "#4A6C8A",
+    "#B08A3E"
 ];
 const winLines = [ // linhas p ganha
     [0, 1, 2], [3, 4, 5], [6, 7, 8], //tentar achar uma forma melhor depois
@@ -20,10 +20,11 @@ export default function Game({ route }) {
     const { players } = route.params;
     const [tabuleiro, setTabuleiro] = useState(
         Array.from({ length: 9 }, () => ({
-            small: null,
+            small: null,//tabueliro comeca sem nada
             medium: null,
             large: null
         })));
+
     const [turn, setTurn] = useState(0);
     const [pecaSize, setPecaSize] = useState("small");
     const [peca, setPeca] = useState(
@@ -32,17 +33,15 @@ export default function Game({ route }) {
             medium: 3,
             large: 3
         })));
+
     const [vitoria, setVitoria] = useState(Array.from({ length: players }, () => 0)) //para cada posição da array colocar 0, acho que esta funcionando kkkkk ;)
 
     function checkWin(tabuleiro) {
         const tamanhos = ["small", "medium", "large"];
         for (let i = 0; i < 9; i++) {
             const cell = tabuleiro[i];
-            if (
-                cell.small &&
-                cell.small === cell.medium &&
-                cell.medium === cell.large
-            ) {
+
+            if (cell.small && cell.small === cell.medium && cell.medium === cell.large) {
                 return cell.small;
             }
         }
@@ -144,6 +143,7 @@ export default function Game({ route }) {
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
                 Vez do Jogador {turn + 1}
             </Text>
+            <Text style={styles.text2}>Peças:</Text>
             <View style={styles.sizeSelector}>
                 <TouchableOpacity
                     style={[styles.sizeBtn, pecaSize === "small" && styles.selected]}
@@ -200,7 +200,7 @@ export default function Game({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#262B2D',
+        backgroundColor: '#7a6447',
         alignItems: "center",
         justifyContent: "center",
     },
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     },
     sizeBtn: {
         color: "white",
-        backgroundColor: "#137FA8",
+        backgroundColor: "#4d5f2f",
         padding: 10,
         borderRadius: 8,
     },
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     selected: {
-        backgroundColor: "#274E5D",
+        backgroundColor: "#2c351c",
     },
     text2: {
         color: "white",
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
     pontos: {
         flexDirection: "row",
         margin: 15,
-        backgroundColor: "#000000",
+        backgroundColor: "#251d0e",
         borderRadius: 100,
         padding: 10,
     },

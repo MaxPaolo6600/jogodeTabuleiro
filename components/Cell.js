@@ -3,9 +3,9 @@ import { TouchableOpacity, View, StyleSheet } from "react-native";
 
 export default function Cell({ cell, onPress }) {
     const tamanhos = {
-        small: 5,
-        medium: 17,
-        large: 25,
+        small: 15,
+        medium: 20,
+        large: 30,
     };
 
     function gerarPosicao(maxDistancia) {
@@ -26,7 +26,7 @@ export default function Cell({ cell, onPress }) {
         const limites = {
             small: 20,
             medium: 28,
-            large: 35,
+            large: 30,
         };
 
         const positions = {};
@@ -89,7 +89,7 @@ export default function Cell({ cell, onPress }) {
                     width: tamanho,
                     height: tamanho,
                     borderWidth: 5,
-                    borderColor: color,
+                    backgroundColor: color,
                     borderRadius: 100,
                     position: "absolute",
                     left: 50 - tamanho / 2 + pos.x,
