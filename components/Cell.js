@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 
 const tamanhos = {
-    small: 15,
-    medium: 20,
-    large: 30,
+    small: 17,
+    medium: 23,
+    large: 32,
 };
 const posicoes = [//posicoes "aleatorias"
     { x: -20, y: -20 },
@@ -22,7 +22,6 @@ export default function Cell({ cell, onPress }) {
             large: embaralhadas[2],
         };
     }, []);
-
     function renderPeca(size, color) {//versao simplificada, testar para ver se funciona
         const tamanho = tamanhos[size];//se nao funcionar ta no GitHub a versao antiga
         const pos = positions[size];
@@ -41,7 +40,6 @@ export default function Cell({ cell, onPress }) {
             />
         );
     }
-
     return (
         <TouchableOpacity
             style={styles.cell}

@@ -79,20 +79,17 @@ export default function Game({ route }) {
     function calcularPorcentagem(tabuleiro) {
         let total = 9 * 3; //espacos do tabuleiro
         let ocupados = 0;
-
         tabuleiro.forEach(cell => {
             if (cell.small) ocupados++;
             if (cell.medium) ocupados++;
             if (cell.large) ocupados++;
         });
-
         return Math.floor((ocupados / total) * 100); //porcentagem do tabuleiro
     }
 
     function play(index) {
         let novoQuadro = [...tabuleiro];
         let novasPecas = [...peca];
-
         if (novasPecas[turn][pecaSize] <= 0) {
             Alert.alert("Sem peças!", "Você não tem mais peças desse tamanho.");
             return;
@@ -101,8 +98,7 @@ export default function Game({ route }) {
         if (novoQuadro[index][pecaSize]) return;
         novoQuadro[index] = {
             ...novoQuadro[index],
-            [pecaSize]: playerColors[turn]
-        };
+            [pecaSize]: playerColors[turn]};
         novasPecas[turn][pecaSize] -= 1;
         setTabuleiro(novoQuadro);
         setPeca(novasPecas);
@@ -114,6 +110,14 @@ export default function Game({ route }) {
             newWins[vitoriosoIndex] += 1;
             setVitoria(newWins);
             Alert.alert(`Jogador ${vitoriosoIndex + 1} venceu!`);
+            resetar();
+            return;
+        }
+        const empate = novoQuadro.every(cell =>
+            cell.small && cell.medium && cell.large
+        );
+        if (empate) {
+            Alert.alert("Empate!", "O tabuleiro ficou cheio.");
             resetar();
             return;
         }

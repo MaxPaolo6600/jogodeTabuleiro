@@ -7,7 +7,16 @@ export default function HomeScreen({ navigation }) {
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.text1}>Quantos jogadores?</Text>
+            <View style={styles.container}>
+                <Text style={styles.text1}>WarKingdom</Text>
+                <Text style={styles.text3}>Max Paolo - Programação</Text>
+                <Text style={styles.text3}>Marco Antonio Slompo - Imagens/Cores</Text>
+                <Text style={styles.text3}>Matheus Henrique Muraro De Souza - Historia/Ideias</Text>
+                <Text style={styles.text3}></Text>
+                <Text style={styles.text3}></Text>
+            </View>
+            <View style={styles.container}>
+            <Text style={styles.text2}>Quantos jogadores?</Text>
             <View style={styles.caixa1}>
                 <TouchableOpacity style={styles.box2} onPress={() => startGame(2)}>
                     <Text style={styles.text}>2</Text>
@@ -18,6 +27,7 @@ export default function HomeScreen({ navigation }) {
                 <TouchableOpacity style={styles.box4} onPress={() => startGame(4)}>
                     <Text style={styles.text}>4</Text>
                 </TouchableOpacity>
+            </View>
             </View>
             <StatusBar style="auto" />
         </View>
@@ -35,33 +45,47 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     box2: {
-        backgroundColor: '#0084ff',
+        backgroundColor: '#4A6C8A',
         width: 100,
         height: 100,
         margin: 15,
         justifyContent: 'center'
     },
     box3: {
-        backgroundColor: '#8400ff',
+        backgroundColor: '#556B2F',
         width: 100,
         height: 100,
         margin: 15,
         justifyContent: 'center'
     },
     box4: {
-        backgroundColor: '#ff0000',
+        backgroundColor: '#8C3B2F',
         width: 100,
         height: 100,
         margin: 15,
         justifyContent: 'center'
     },
     text1: {
-        fontSize: 30,
-        color: 'white'
+        fontSize: 50,
+        color: 'white',
+        borderColor: "#4A6C8A",
+        borderWidth: 4,
+        padding: 8,
+        borderRadius: 20,
     },
     text: {
         textAlign: 'center',
         fontSize: 50,
         color: 'white'
-    }
+    },
+    text2:{
+        fontSize: 30,
+        color: 'white',
+    },
+    text3:{
+        fontSize: 20,
+        color: 'white',
+        textAlign: "center",
+        padding: 5,
+    },
 });
