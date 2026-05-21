@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
         color: "white",
     },
     span1: {
-        color: "#ff0000",
+        color: "#8C3B2F",
     },
     span2: {
-        color: "#00ff00",
+        color: "#556B2F",
     },
     span3: {
-        color: "#0084ff",
+        color: "#4A6C8A",
     },
     span4: {
-        color: "#8400ff",
+        color: "#B08A3E",
     },
     img: {
         width: 100,

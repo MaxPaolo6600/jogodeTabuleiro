@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function Historia({ navigation, route }) {
     const { players } = route.params;
@@ -8,16 +8,13 @@ export default function Historia({ navigation, route }) {
     return (
         <View style={styles.container}>
             <Text style={styles.text1}>
-                Em um reino chamado Nove Vilas, quatro aventureiros foram escolhidos para participar de um desafio lendário: encontrar o Cristal Supremo, um artefato antigo que concede poder e glória a quem o possuir.
+                Em um universo corrompido, algo que um dia ja foi normal hoje está a beira do colapso, oque fará esse mundo ver a luz novamente?
             </Text>
             <Text style={styles.text1}>
-                Os jogadores são rivais, mas compartilham o mesmo objetivo. Cada um segue por caminhos diferentes — florestas encantadas, cavernas escuras, montanhas perigosas e ruínas esquecidas — enfrentando desafios e superando obstáculos.
+                Nesta terra existe uma reliquia que promete dar poder ilimitado a quem a possuir, apenas 4 seres sabem de sua existência e farão de tudo para obte-la, a reliquia está localizada em uma das nove vilas, muito bem protegida por uma magia antiga com sigilos que nem o mais habilidoso mago conseguiria decifrar.
             </Text>
             <Text style={styles.text1}>
-                Ao longo da jornada, eles podem se cruzar, competir por recursos e até atrapalhar uns aos outros. Só um conseguirá chegar primeiro ao templo final, onde o Cristal Supremo está guardado.
-            </Text>
-            <Text style={styles.text1}>
-                No fim, apenas o jogador mais habilidoso, estratégico (e um pouco sortudo) conseguirá vencer — tornando-se o único campeão.
+                Apenas o ser mais apto poderá encontra-la e tirar esse mundo das trevas ou quem sabe afunda-lo na escuridão novamente.
             </Text>
             <TouchableOpacity style={styles.button} onPress={goTutorial}>
                 <Text style={styles.text}>Voltar para Tutorial</Text>
@@ -28,7 +25,7 @@ export default function Historia({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#262B2D',
+        backgroundColor: '#7a6447',
         alignItems: 'center',
         justifyContent: 'center'
     },
