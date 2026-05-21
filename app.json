@@ -26,6 +26,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "maxpaolo6600"
+    "owner": "maxpaolo6600",
+    "extra": {
+      "eas": {
+        "projectId": "a2bdc0ec-c9f9-4563-bbae-636417e5bf40"
+      }
+    }
   }
 }
