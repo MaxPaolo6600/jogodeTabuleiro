@@ -10,6 +10,7 @@ const playerColors = [
     "#4A6C8A",
     "#B08A3E"
 ];
+
 const winLines = [ // linhas p ganha
     [0, 1, 2], [3, 4, 5], [6, 7, 8], //tentar achar uma forma melhor depois
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
