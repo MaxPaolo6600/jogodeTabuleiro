@@ -49,7 +49,7 @@ export default function Cell({ cell, onPress }) {
                     <Image
                         key={index}
                         source={imagens[color]}
-                        tintColor="black"
+                        tintColor="white"
                         style={{
                             width: tamanho,
                             height: tamanho,

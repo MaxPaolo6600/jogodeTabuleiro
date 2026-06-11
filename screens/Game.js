@@ -2,7 +2,8 @@ import { useState } from "react";
 import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground } from "react-native";
 import Cell from "../components/Cell";
 
-const imagem = require('../assets/img/imgback.jpg')
+const imagem = require('../assets/img/imgback2.jpg');
+const background = require("../assets/img/bg2.png");
 
 const playerColors = [
     "#8C3B2F",
@@ -17,7 +18,7 @@ const winLines = [ // linhas p ganha
     [0, 4, 8], [2, 4, 6]
 ];
 
-export default function Game({ route }) {
+export default function Game({ route, navigation }) {
     const { players } = route.params;
     const [tabuleiro, setTabuleiro] = useState(
         Array.from({ length: 9 }, () => ({
@@ -41,7 +42,6 @@ export default function Game({ route }) {
         const tamanhos = ["small", "medium", "large"];
         for (let i = 0; i < 9; i++) {
             const cell = tabuleiro[i];
-
             if (cell.small && cell.small === cell.medium && cell.medium === cell.large) {
                 return cell.small;
             }
@@ -99,7 +99,8 @@ export default function Game({ route }) {
         if (novoQuadro[index][pecaSize]) return;
         novoQuadro[index] = {
             ...novoQuadro[index],
-            [pecaSize]: playerColors[turn]};
+            [pecaSize]: playerColors[turn]
+        };
         novasPecas[turn][pecaSize] -= 1;
         setTabuleiro(novoQuadro);
         setPeca(novasPecas);
@@ -110,7 +111,23 @@ export default function Game({ route }) {
             let newWins = [...vitoria];
             newWins[vitoriosoIndex] += 1;
             setVitoria(newWins);
-            Alert.alert(`Jogador ${vitoriosoIndex + 1} venceu!`);
+            if (newWins[vitoriosoIndex] >= 3) {
+                Alert.alert(
+                    "Fim da partida!",
+                    `Jogador ${vitoriosoIndex + 1} venceu com 3 pontos!`,
+                    [
+                        {
+                            text: "OK",
+                            onPress: () =>
+                                navigation.navigate("Desisao", {
+                                    vencedor: vitoriosoIndex + 1,
+                                }),
+                        },
+                    ]
+                );
+                return;
+            }
+            Alert.alert(`Jogador ${vitoriosoIndex + 1} venceu a rodada!`);
             resetar();
             return;
         }
@@ -144,7 +161,11 @@ export default function Game({ route }) {
         setPecaSize("small");
     }
     return (
-        <View style={styles.container}>
+        <ImageBackground
+            source={background}
+            style={styles.container}
+            resizeMode="cover"
+        >
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
                 Vez do Jogador {turn + 1}
             </Text>
@@ -198,14 +219,14 @@ export default function Game({ route }) {
                     Porcentagem do campo utilizado: {calcularPorcentagem(tabuleiro)}%
                 </Text>
             </View>
-        </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#7a6447',
+        backgroundColor: '#461812',
         alignItems: "center",
         justifyContent: "center",
     },
@@ -215,7 +236,6 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         justifyContent: "center",
         overflow: "hidden",
-        borderRadius: 30,
     },
     turn: {
         color: 'white',

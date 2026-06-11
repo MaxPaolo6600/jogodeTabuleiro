@@ -25,7 +25,7 @@ export default function Historia({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#7a6447',
+        backgroundColor: '#461812',
         alignItems: 'center',
         justifyContent: 'center'
     },
