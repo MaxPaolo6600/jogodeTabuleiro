@@ -5,6 +5,12 @@ import {
 
 export default function Desisao({ route, navigation }) {
     const { vencedor } = route.params;
+    function goDecisão1() {
+        navigation.navigate("LadoBom");
+    }
+    function goDecisão2() {
+        navigation.navigate("LadoRuim");
+    }
     const mensagens = [
         `O Jogador ${vencedor} foi digno de conquistar a relíquia.`,
         "O futuro dessas terras está em suas mãos...",
@@ -57,6 +63,7 @@ export default function Desisao({ route, navigation }) {
                 <View style={styles.botoes}>
                     <TouchableOpacity
                         style={styles.botao}
+                        onPress={goDecisão1}
                     >
                         <Text style={styles.textoBotao}>
                             Salvar o Reino
@@ -64,6 +71,7 @@ export default function Desisao({ route, navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.botao2}
+                        onPress={goDecisão2}
                     >
                         <Text style={styles.textoBotao}>
                             Salvar a sí mesmo

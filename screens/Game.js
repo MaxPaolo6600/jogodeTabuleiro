@@ -165,6 +165,7 @@ export default function Game({ route, navigation }) {
             source={background}
             style={styles.container}
             resizeMode="cover"
+            imageStyle={{ opacity: 0.6 }}
         >
             <Text style={[styles.turn, { backgroundColor: playerColors[turn] }]}>
                 Vez do Jogador {turn + 1}
@@ -226,7 +227,7 @@ export default function Game({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#461812',
+        backgroundColor: '#000000',
         alignItems: "center",
         justifyContent: "center",
     },

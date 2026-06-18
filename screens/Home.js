@@ -12,8 +12,8 @@ export default function HomeScreen({ navigation }) {
                 <Text style={styles.text3}>Max Paolo Turco Klock - Programação</Text>
                 <Text style={styles.text3}>Marco Antonio Slompo - Imagens/Cores</Text>
                 <Text style={styles.text3}>Matheus Henrique Muraro De Souza - Historia/Ideias</Text>
-                <Text style={styles.text3}>FRANSSIANO FERREIRA SCHNEIDERS - Historia/Ideias</Text>
-                <Text style={styles.text3}>KAUE GABRIEL SCHVABE SLOMPO - Historia/Ideias</Text>
+                <Text style={styles.text3}>FRANSSIANO FERREIRA SCHNEIDERS - Ideias</Text>
+                <Text style={styles.text3}>KAUE GABRIEL SCHVABE SLOMPO - Ideias</Text>
             </View>
             <View style={styles.container}>
                 <Text style={styles.text2}>Quantos jogadores?</Text>

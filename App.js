@@ -6,6 +6,8 @@ import Game from "./screens/Game";
 import Tutorial from "./screens/Tutorial";
 import Historia from "./screens/Historia";
 import Desisao from "./screens/Decisao";
+import LadoRuim from "./screens/LadoRuim";
+import LadoBom from "./screens/LadoBom";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,8 @@ export default function App() {
         <Stack.Screen name="Tutorial" component={Tutorial}/>
         <Stack.Screen name="Historia" component={Historia}/>
         <Stack.Screen name="Desisao" component={Desisao}/>
+        <Stack.Screen name="LadoRuim" component={LadoRuim}/>
+        <Stack.Screen name="LadoBom" component={LadoBom}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

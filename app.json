@@ -20,15 +20,6 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
-      },
-      "package": "com.maxpaolo6600.jogodeTabuleiro"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "62cb354c-6a4b-4a15-aebb-78c412a51ff1"
       }
     }
   }
