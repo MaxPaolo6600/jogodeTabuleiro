@@ -1,12 +1,43 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { useRef, useCallback } from "react";
+import { Audio } from "expo-av";
+import { useFocusEffect } from "@react-navigation/native";
+const bg3 = require("../assets/img/bg2.png")
 
 export default function Historia({ navigation, route }) {
     const { players } = route.params;
     function goTutorial() {
         navigation.navigate("Tutorial", { players });
     }
+    const soundRef = useRef(null);
+
+useFocusEffect(
+    useCallback(() => {
+        async function playMusic() {
+            const { sound } = await Audio.Sound.createAsync(
+                require("../assets/audio/mp31.mp3"),
+                {
+                    shouldPlay: true,
+                    isLooping: true,
+                }
+            );
+
+            soundRef.current = sound;
+        }
+
+        playMusic();
+
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.stopAsync();
+                soundRef.current.unloadAsync();
+                soundRef.current = null;
+            }
+        };
+    }, [])
+);
     return (
-        <View style={styles.container}>
+        <ImageBackground style={styles.container} source={bg3}>
             <Text style={styles.text1}>
                 Em um universo corrompido, algo que um dia ja foi normal hoje está a beira do colapso, oque fará esse mundo ver a luz novamente?
             </Text>
@@ -19,7 +50,7 @@ export default function Historia({ navigation, route }) {
             <TouchableOpacity style={styles.button} onPress={goTutorial}>
                 <Text style={styles.text}>Voltar para Tutorial</Text>
             </TouchableOpacity>
-        </View>
+        </ImageBackground>
     );
 }
 const styles = StyleSheet.create({
